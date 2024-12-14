@@ -1,0 +1,17 @@
+.no-libraries-container {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	text-align: center;
+	height: 100%;
+
+	#title {
+		font-size: xx-large;
+		font-weight: bold;
+		margin-bottom: 1em;
+	}
+
+	#subtitle {
+		font-size: large;
+	}
+}

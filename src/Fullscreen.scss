@@ -1,0 +1,727 @@
+@use "./windows/utils/variables" as v;
+
+$app-color: #8edce6;
+$app-color-darken: #80c4cd;
+$app-color-darker: #71aeb6;
+$color-text-primary: #ffffff;
+$color-text-default: #d2d2d2e6;
+$color-text-dark: #d0d0d0cc;
+$color-darker: #101010;
+$color-dark: #222222;
+$color-default: #282828;
+$color-light: #323232;
+$color-lighter: #5e5e5e;
+$color-more-lighter: #707070;
+$color-bright: #edf2f4;
+
+$font-x-small: calc(0.625 * 1.5vh); // ≈ 0.9375vh
+$font-small: calc(0.812 * 1.5vh); // ≈ 1.218vh
+$font-medium: calc(1 * 1.5vh); // 1.5vh
+$font-large: calc(1.125 * 1.5vh); // ≈ 1.6875vh
+$font-x-large: calc(1.5 * 1.5vh); // 2.25vh
+$font-xx-large: calc(2 * 1.5vh); // 3vh
+$font-xxx-large: calc(2.5 * 1.5vh); // 3.75vh
+$font-xxx-larger: calc(3 * 1.5vh); // 4.5vh
+
+#root {
+	margin: 0 auto;
+	text-align: center;
+
+	font-family: "Verdana", sans-serif;
+	background-color: #000000;
+
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	color: $color-text-default;
+
+	button {
+		cursor: pointer;
+	}
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	user-select: none;
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	text-align: left;
+
+	z-index: 10;
+
+	.home-container {
+		height: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: flex-end;
+		overflow-y: hidden;
+	
+		.home-info-container {
+			display: flex;
+			flex-flow: column nowrap;
+			margin-left: 4em;
+			margin-bottom: 2em;
+			gap: 1em;
+		
+			z-index: 100;
+		
+			img {
+				width: auto;
+				max-width: 40vh;
+			}
+		
+			#home-title {
+				font-size: $font-xxx-large;
+				font-weight: bold;
+				color: $color-text-primary;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+		
+			#home-subtitle {
+				font-size: $font-xxx-large;
+				font-weight: bold;
+				color: $color-text-primary;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+		
+			#home-overview {
+				font-size: $font-x-large;
+				color: $color-text-default;
+		
+				max-width: 100vh;
+		
+				box-sizing: border-box;
+		
+				--line-clamp-amount: 3;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden !important;
+				text-overflow: ellipsis;
+				line-clamp: var(--line-clamp-amount);
+				-webkit-line-clamp: var(--line-clamp-amount);
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+		
+			.home-info-horizontal {
+				display: flex;
+				gap: 1em;
+		
+				font-size: $font-x-large;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.472));
+			}
+		}
+	}
+
+	.shows-container {
+		display: flex;
+		flex-flow: row wrap;
+		padding: 2em 4em;
+		gap: 1em;
+
+		.shows-button {
+			display: flex;
+			padding: 0;
+			background-color: transparent;
+
+			justify-content: center;
+			align-items: center;
+
+			border: 0.3em solid transparent;
+			transition: all 0.15s ease;
+		}
+
+		.selected {
+			border-color: white;
+			transform: scale(1.07);
+		}
+	}
+
+	.season-container {
+		height: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: flex-end;
+		overflow-y: hidden;
+
+		.season-info-container {
+			display: flex;
+			flex-flow: column nowrap;
+			margin-left: 4em;
+			margin-bottom: 2em;
+			gap: 1em;
+
+			color: $color-text-primary;
+
+			img {
+				max-height: 20vh;
+				width: fit-content;
+				max-width: 100vh;
+			}
+
+			#season-title {
+				font-size: $font-xxx-large;
+				font-weight: bold;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			#season-subtitle {
+				font-size: $font-xxx-larger;
+				font-weight: bold;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			.season-overview-container {
+				margin-top: 0.5em;
+				padding: 0.8em 2em 0.8em 0.5em;
+				width: fit-content;
+				border-radius: 10px;
+			}
+
+			#season-overview {
+				font-size: $font-x-large;
+
+				max-width: 100vh;
+				height: 8vh;
+
+				box-sizing: border-box;
+
+				--line-clamp-amount: 3;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden !important;
+				text-overflow: ellipsis;
+				line-clamp: var(--line-clamp-amount);
+				-webkit-line-clamp: var(--line-clamp-amount);
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			.season-overview-container:focus {
+				background-color: #6d6d6d8a;
+			}
+
+			.season-overview-container:hover {
+				background-color: #3a3a3a8a;
+				cursor: pointer;
+			}
+
+			.season-info-horizontal {
+				display: flex;
+				gap: 1em;
+
+				font-size: $font-x-large;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.472));
+			}
+		}
+
+		.episodes-list {
+			padding: 1.5em 0;
+			padding-left: 4em;
+			padding-right: 4em;
+			margin-right: 4em;
+			display: flex;
+			gap: 3em;
+			overflow-y: hidden;
+			overflow-x: hidden;
+
+			.element {
+				border: 0.3em solid transparent;
+				transition: all 0.15s ease;
+
+				img {
+					height: 22vh;
+					width: auto;
+				}
+			}
+
+			.element-selected {
+				transform: scale(1.1);
+				border-color: white;
+			}
+		}
+
+		.season-btns {
+			margin: 2em 4em 2em 4em;
+			display: flex;
+			gap: 1em;
+
+			.btns-container {
+				margin-right: 4em;
+				display: flex;
+				gap: 1em;
+
+				.season-btn {
+					padding: 1.3em;
+					border-radius: 50px;
+					outline: none;
+					border: none;
+					background-color: #101010;
+
+					display: flex;
+					align-items: center;
+					gap: 1em;
+
+					transition: all 0.15s ease;
+
+					svg {
+						width: 3vh;
+						height: 3vh;
+					}
+
+					span {
+						display: none;
+						font-size: $font-medium;
+						color: $color-text-primary;
+					}
+				}
+
+				.season-btn:hover {
+					background-color: #080808;
+
+					span {
+						display: block;
+					}
+				}
+
+				#playButton {
+					span {
+						display: block;
+					}
+				}
+			}
+
+			.tracks-info {
+				gap: 1.5em;
+				display: flex;
+				align-items: center;
+
+				.track-info {
+					background-color: #101010;
+					border-radius: 10px;
+					padding: 0.5em 1em;
+
+					font-size: $font-large;
+					font-weight: bold;
+					color: $color-text-primary;
+
+					display: flex;
+					align-items: center;
+
+					svg {
+						width: 1em;
+						height: 1em;
+
+						margin-right: 0.5em;
+					}
+				}
+			}
+		}
+	}
+
+	.music-container {
+		height: 100%;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: flex-start;
+		overflow-y: hidden;
+
+		.music-info-container {
+			display: flex;
+			flex-flow: column nowrap;
+			margin-top: 2em;
+			margin-left: 8em;
+			margin-bottom: 2em;
+			width: 40%;
+			gap: 1em;
+
+			color: $color-text-primary;
+
+			.album-image {
+				img {
+					border-radius: 5px;
+					width: 30vh;
+					height: auto;
+				}
+			}
+
+			#music-title {
+				font-size: $font-xxx-large;
+				font-weight: bold;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			#music-subtitle {
+				font-size: $font-xx-large;
+				font-weight: bold;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			.music-overview-container {
+				margin-top: 0.5em;
+				padding: 0.8em 2em 0.8em 0.5em;
+				width: fit-content;
+				border-radius: 10px;
+			}
+
+			#music-overview {
+				font-size: $font-x-large;
+
+				max-width: 100vh;
+				height: 8vh;
+
+				box-sizing: border-box;
+
+				--line-clamp-amount: 3;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden !important;
+				text-overflow: ellipsis;
+				line-clamp: var(--line-clamp-amount);
+				-webkit-line-clamp: var(--line-clamp-amount);
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			.music-overview-container:focus {
+				background-color: #6d6d6d8a;
+			}
+
+			.music-overview-container:hover {
+				background-color: #3a3a3a8a;
+				cursor: pointer;
+			}
+
+			.music-info-horizontal {
+				display: flex;
+				gap: 1em;
+
+				font-size: $font-x-large;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.472));
+			}
+		}
+
+		.music-list {
+			padding: 1.5em 0;
+			padding-left: 4em;
+			padding-right: 8em;
+			margin-right: 5em;
+			display: flex;
+			flex-flow: column nowrap;
+			gap: 0.5em;
+			overflow-y: hidden;
+			overflow-x: hidden;
+			width: 60%;
+
+			.disc-text-title {
+				font-size: $font-x-large;
+				font-weight: bold;
+				color: white;
+				margin-bottom: 0.3em;
+			}
+
+			.separator {
+				margin-top: 0.5em;
+			}
+
+			.element {
+				padding: 2em;
+				border: none;
+				border-radius: 5px;
+				background-color: #5e5e5e4f;
+				transition: all 0.15s ease;
+
+				font-size: $font-medium;
+
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.element-selected {
+				background-color: white;
+				color: black;
+			}
+		}
+
+		.music-btns {
+			margin: 2em 0 2em 0;
+			display: flex;
+			gap: 1em;
+
+			.btns-container {
+				margin-right: 4em;
+				display: flex;
+				gap: 1em;
+
+				.season-btn {
+					padding: 1.3em;
+					border-radius: 50px;
+					outline: none;
+					border: none;
+					background-color: #101010;
+
+					display: flex;
+					align-items: center;
+					gap: 1em;
+
+					transition: all 0.15s ease;
+
+					svg {
+						width: 3vh;
+						height: 3vh;
+					}
+
+					span {
+						display: none;
+						font-size: $font-medium;
+						color: $color-text-primary;
+					}
+				}
+
+				.season-btn:hover {
+					background-color: #080808;
+
+					span {
+						display: block;
+					}
+				}
+
+				#playButton {
+					span {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	.albums-container {
+		height: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: flex-start;
+		overflow-y: hidden;
+
+		.music-info-container {
+			display: flex;
+			flex-flow: row nowrap;
+			margin-top: 2em;
+			margin-left: 8em;
+			margin-bottom: 5em;
+			gap: 1em;
+
+			color: $color-text-primary;
+
+			.album-image {
+				img {
+					border-radius: 5px;
+					width: 33vh;
+					height: 30vh;
+				}
+			}
+
+			.collection-info {
+				margin-left: 2em;
+				gap: 0.5em;
+				display: flex;
+				flex-flow: column nowrap;
+			}
+
+			#music-title {
+				font-size: $font-xxx-large;
+				font-weight: bold;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			#music-subtitle {
+				font-size: $font-xx-large;
+				font-weight: bold;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			.music-overview-container {
+				margin-top: 0.5em;
+				padding: 0.8em 2em 0.8em 0.5em;
+				width: fit-content;
+				border-radius: 10px;
+			}
+
+			#music-overview {
+				font-size: $font-x-large;
+
+				max-width: 100vh;
+				height: 8vh;
+
+				box-sizing: border-box;
+
+				--line-clamp-amount: 3;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden !important;
+				text-overflow: ellipsis;
+				line-clamp: var(--line-clamp-amount);
+				-webkit-line-clamp: var(--line-clamp-amount);
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+			}
+
+			.music-overview-container:focus {
+				background-color: #6d6d6d8a;
+			}
+
+			.music-overview-container:hover {
+				background-color: #3a3a3a8a;
+				cursor: pointer;
+			}
+
+			.music-info-horizontal {
+				display: flex;
+				gap: 1em;
+
+				font-size: $font-x-large;
+				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.472));
+			}
+		}
+
+		.music-btns {
+			margin: 2em 0 2em 0;
+			display: flex;
+			gap: 1em;
+
+			.btns-container {
+				margin-right: 4em;
+				display: flex;
+				gap: 1em;
+
+				.season-btn {
+					padding: 1.3em;
+					border-radius: 50px;
+					outline: none;
+					border: none;
+					background-color: #101010;
+
+					display: flex;
+					align-items: center;
+					gap: 1em;
+
+					transition: all 0.15s ease;
+
+					svg {
+						width: 3vh;
+						height: 3vh;
+					}
+
+					span {
+						display: none;
+						font-size: $font-medium;
+						color: $color-text-primary;
+					}
+				}
+
+				.season-btn:hover {
+					background-color: #080808;
+
+					span {
+						display: block;
+					}
+				}
+
+				#playButton {
+					span {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}
+
+.next-season-btn-container {
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	-webkit-app-region: no-drag;
+
+	gap: 2em;
+
+	button {
+		padding: 0;
+		margin: 0;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		opacity: 0.5;
+		transition: all 0.15s ease;
+
+		color: white;
+		font-size: $font-x-large;
+	}
+
+	button:hover {
+		opacity: 1;
+	}
+
+	#prevBtn {
+		transform: rotate(180deg);
+	}
+
+	.selected-season-btn {
+		opacity: 1;
+		transform: scale(1.1);
+		color: $app-color;
+	}
+}
+
+.gradient-left {
+	position: absolute;
+	left: 0;
+	opacity: 0;
+	width: 20vw;
+	height: 100%;
+	z-index: 1;
+	filter: brightness(15%);
+}
+
+.gradient {
+	position: absolute;
+	right: 0;
+	opacity: 0;
+	width: 80vw;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+	background-size: 100% 100%;
+	background-position: 0px 0px;
+	filter: brightness(15%);
+}
+
+.background-image {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+
+	opacity: 0;
+
+	display: flex;
+	justify-content: right;
+
+	img {
+		min-width: 80%;
+		object-fit: cover;
+		mask-image: linear-gradient(
+			to left,
+			rgba(0, 0, 0, 1) 20%,
+			rgba(0, 0, 0, 0) 100%
+		);
+	}
+}

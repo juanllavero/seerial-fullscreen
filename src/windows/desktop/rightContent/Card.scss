@@ -1,0 +1,224 @@
+@use "../../utils/variables" as v;
+
+.card {
+	.top-section {
+		position: relative;
+
+		.watched {
+			position: absolute;
+			top: 0;
+			right: 0;
+			background-color: rgb(0, 0, 0);
+
+			z-index: 100;
+			display: flex;
+
+			border-radius: 0 2px 0 3px;
+			padding: .3rem .4rem;
+
+			svg {
+				width: 1.3rem;
+			}
+		}
+
+		.watched-count {
+			position: absolute;
+			top: 0;
+			right: 0;
+			background-color: rgb(0, 0, 0);
+
+			z-index: 0;
+			display: flex;
+
+			border-radius: 0 2px 0 3px;
+			padding: .3rem .4rem;
+
+			span {
+				min-width: 1.5rem;
+				text-align: center;
+			}
+		}
+
+		.card-slider {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			display: flex;
+
+			.slider {
+				width: 100%;
+				-webkit-appearance: none;
+				appearance: none;
+				height: 5px;
+				border-radius: 25px;
+				background-color: #646464;
+				outline: none;
+				opacity: 1;
+				-webkit-transition: 0.3s;
+				transition: background-color 0.3s;
+
+				&:hover {
+					background-color: #dedede;
+				}
+
+				&::-webkit-slider-thumb {
+					-webkit-appearance: none;
+					appearance: none;
+
+					width: 15px;
+					height: 15px;
+					border-radius: 50px;
+					background: v.$color-text-primary;
+					cursor: pointer;
+				}
+			}
+
+			.hide-slider-thumb::-webkit-slider-thumb {
+				display: none;
+			}
+		}
+
+		.on-loading {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+
+			border-radius: 4px;
+			display: none;
+			justify-content: center;
+			align-items: center;
+			background-color: rgba(0, 0, 0, 0.362);
+
+			.spinner {
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				display: inline-block;
+				border-top: 3px solid v.$app-color;
+				border-right: 3px solid transparent;
+				box-sizing: border-box;
+				animation: rotation 1s linear infinite;
+			}
+
+			@keyframes rotation {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+		}
+
+		.visible {
+			display: flex;
+		}
+
+		.on-hover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+
+			padding: 0.5em 0.3em;
+
+			display: none;
+			border-radius: 4px;
+			border: 2px solid transparent;
+			background-color: rgba(0, 0, 0, 0.46);
+
+			flex-flow: row nowrap;
+			justify-content: space-between;
+			align-items: end;
+
+			transition: all 0.3s ease-in-out;
+			cursor: pointer;
+
+			& button {
+				z-index: 100;
+			}
+
+			.play-btn-container {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.play-btn-episode {
+					position: absolute;
+					background-color: rgba(0, 0, 0, 0.588);
+					border: 2px solid white;
+					border-radius: 50px;
+					width: 70px;
+					height: 70px;
+					padding: 15px;
+					transition: backgound-color 0.3s ease-in-out;
+
+					svg {
+						width: 32px;
+						height: 32px;
+
+						path {
+							fill: v.$color-text-primary;
+							transition: fill 0.2s ease-in-out;
+						}
+					}
+
+					&:hover {
+						background-color: v.$app-color;
+						border-color: v.$app-color;
+						cursor: pointer;
+
+						svg path {
+							fill: rgb(38, 38, 38);
+						}
+					}
+				}
+			}
+
+			&:hover {
+				border-color: v.$app-color;
+			}
+		}
+
+		.image-section {
+			display: flex;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+
+				border-radius: 5px;
+				box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.414);
+			}
+		}
+
+		&:hover {
+			.on-hover {
+				display: flex;
+			}
+		}
+	}
+
+	.info-section {
+		display: flex;
+		flex-flow: column nowrap;
+		text-align: left;
+
+		#title {
+			font-size: medium;
+		}
+
+		#subtitle {
+			margin-left: 0.3em;
+			font-size: small;
+			color: rgb(184, 184, 184);
+		}
+	}
+}

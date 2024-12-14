@@ -1,0 +1,325 @@
+@use "./variables" as v;
+
+.a_text {
+	position: relative;
+	margin-top: 10px;
+	margin-left: 0.3em;
+	width: fit-content;
+	color: v.$color-text-primary;
+
+	cursor: pointer;
+
+	overflow: hidden !important;
+	text-overflow: ellipsis;
+	white-space: nowrap !important;
+	max-width: 100%;
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 0;
+		height: 1px;
+		background-color: white;
+		transition: width 0.2s ease;
+	}
+
+	&:hover::after {
+		width: 100%;
+	}
+}
+
+/* LOADING CIRCLE SPINNER */
+.dialog-downloading {
+	position: absolute;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+
+	z-index: 999;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: #000000c4;
+
+	.loading-circle {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		display: inline-block;
+		border-top: 3px solid v.$app-color;
+		border-right: 3px solid transparent;
+		box-sizing: border-box;
+		animation: rotation 1s linear infinite;
+	}
+
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+.downloading-content {
+	position: absolute;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+
+	top: 2rem;
+	width: 90%;
+	z-index: 100;
+
+	.loading-circle {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		display: inline-block;
+		border-top: 3px solid v.$app-color;
+		border-right: 3px solid transparent;
+		box-sizing: border-box;
+		animation: rotation 1s linear infinite;
+	}
+
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+/* BUTTONS */
+
+.svg-button-desktop-transparent {
+	background-color: transparent;
+	cursor: pointer;
+	border: none;
+
+	path {
+		opacity: 0.8;
+		transition: opacity 0.15s ease;
+	}
+
+	img {
+		opacity: 0.8;
+		transition: opacity 0.15s ease;
+	}
+
+	&:hover {
+		path {
+			opacity: 1;
+		}
+
+		img {
+			opacity: 1;
+		}
+	}
+}
+
+.play-button-desktop {
+	background-color: v.$app-color-darken;
+	padding: 10px 15px;
+	border-radius: 5px;
+	border-color: transparent;
+	color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	&:hover {
+		background-color: v.$app-color;
+	}
+
+	svg {
+		width: 24px;
+		height: 24px;
+
+		path {
+			fill: black;
+		}
+	}
+
+	#playText {
+		margin-left: 10px;
+	}
+}
+
+.svg-button-desktop {
+	background-color: transparent;
+	border-radius: 5px;
+	border-color: transparent;
+	padding: 5px 12px 5px 12px;
+	margin-left: 10px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.739);
+	}
+
+	svg {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+.btn {
+	margin-right: 0.6em;
+
+	padding: 1em 1.3em 1em 1.3em;
+
+	border: none;
+	border-radius: 3px;
+
+	transition: background-color 0.3s ease;
+
+	font-size: small;
+	font-weight: bold;
+	color: v.$color-text-primary;
+	background-color: v.$color-lighter;
+
+	cursor: pointer;
+}
+
+.btn:hover {
+	background-color: v.$color-more-lighter;
+}
+
+/* SCROLL DESIGN */
+.scroll {
+	overflow: auto;
+	position: relative;
+	box-sizing: content-box;
+
+	&::-webkit-scrollbar {
+		width: 0.7em;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: rgb(59, 59, 59);
+		border-radius: 20px;
+		background-clip: content-box;
+		width: 0.5em;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: rgb(126, 126, 126);
+		width: 0.7em;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		pointer-events: none;
+	}
+}
+
+/* IMAGES */
+.gradient-background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	z-index: 0;
+
+	filter: brightness(0.25);
+}
+
+.main-background {
+	filter: brightness(0.6);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	width: 100vw;
+	height: 100vh;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		opacity: 0;
+		transition: opacity 1s ease-in;
+	}
+
+	.loaded {
+		opacity: 1;
+	}
+}
+
+.noise-background {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+
+	background-image: url("/src//img/noise.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0.02;
+}
+
+.blur-background-image {
+	background-size: cover;
+	background-position: top;
+	background-repeat: no-repeat;
+	background-color: #101010;
+}
+
+.poster-image img {
+	width: 250px;
+	height: 375px;
+	border-radius: 7px 7px 0px 0px;
+}
+
+.round-image img {
+	border-radius: 7px;
+}
+
+/* EFFECTS */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.fade-in {
+	animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.fade-out {
+	animation: fadeOut 0.5s ease-in-out;
+}

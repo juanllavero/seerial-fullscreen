@@ -1,0 +1,38 @@
+.home-view-container {
+	margin: 10rem 260px 0 40px;
+	max-width: fit-content;
+
+	text-align: left;
+
+	#section-title {
+		margin-left: 0.5rem;
+		font-size: larger;
+		font-weight: bold;
+	}
+
+	.container {
+		margin-top: 1rem;
+		max-width: fit-content;
+		display: flex;
+		flex-flow: row wrap;
+		overflow-x: hidden;
+		scroll-behavior: smooth;
+
+		padding-right: 2em;
+
+		margin-bottom: 1.5em;
+		gap: 0.8em;
+	}
+}
+
+h2 {
+	position: absolute;
+	top: 20%;
+	left: 35%;
+}
+
+@media (max-width: 720px) {
+	.home-view-container {
+		margin: 10em 120px 0 40px;
+	}
+}
