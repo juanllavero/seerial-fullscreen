@@ -54,15 +54,15 @@ export class ReactUtils {
 	) => {
 		if (collection && !album) {
 			if (collection.coverSrc !== "") {
-				ReactUtils.getDominantColors(collection.coverSrc);
+				ReactUtils.getDominantColors(`http://192.168.1.45:3000/${collection.coverSrc}`);
 			} else {
 				ReactUtils.getDominantColors("/img/songDefault.png");
 			}
 		} else if (collection && album) {
 			if (album.coverSrc !== "") {
-				ReactUtils.getDominantColors(album.coverSrc);
+				ReactUtils.getDominantColors(`http://192.168.1.45:3000/${album.coverSrc}`);
 			} else if (collection.coverSrc !== "") {
-				ReactUtils.getDominantColors(collection.coverSrc);
+				ReactUtils.getDominantColors(`http://192.168.1.45:3000/${collection.coverSrc}`);
 			} else {
 				ReactUtils.getDominantColors("/img/songDefault.png");
 			}

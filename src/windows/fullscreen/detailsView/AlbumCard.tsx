@@ -41,7 +41,7 @@ function AlbumCard({
 			<Image
 				src={element.coverSrc}
 				alt="Poster"
-				isRelative={false}
+				isRelative={true}
 				errorSrc="/img/songDefault.png"
 			/>
 			<span>{element.name}</span>

@@ -41,8 +41,8 @@ function SongsView() {
 					<Image
 						src={currentSeason.coverSrc}
 						alt="Poster"
-						isRelative={false}
-						errorSrc="/img/fileNotFound.jpg"
+						isRelative={true}
+						errorSrc="/img/songDefault.png"
 					/>
 				</div>
 				<span id="music-title">{currentShow.name}</span>

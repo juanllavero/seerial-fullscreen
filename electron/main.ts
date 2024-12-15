@@ -22,7 +22,6 @@ export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
 
 let win: BrowserWindow | null;
-let fullScreenWindow: BrowserWindow | null;
 let controlsWindow: BrowserWindow | null;
 let mpvController: MPVController | null = null;
 //#endregion
@@ -206,31 +205,6 @@ function createControlWindow(
 	});
 }
 
-function createFullscreenWindow() {
-	fullScreenWindow = new BrowserWindow({
-		fullscreen: false,
-		alwaysOnTop: false,
-		icon: "./src/assets/icon.ico",
-		transparent: false,
-		frame: false,
-		hasShadow: false,
-		resizable: true,
-		webPreferences: {
-			preload: path.join(__dirname, "preload.mjs"),
-			contextIsolation: true,
-			nodeIntegration: true,
-			webSecurity: false,
-			plugins: true,
-		},
-	});
-
-	if (VITE_DEV_SERVER_URL) {
-		fullScreenWindow.loadURL(path.join(VITE_DEV_SERVER_URL, "fullscreen"));
-	} else {
-		fullScreenWindow.loadFile(path.join(RENDERER_DIST, "../fullscreen.html"));
-	}
-}
-
 //#endregion
 
 //#region VIDEO PLAYER INTERACTION
@@ -341,9 +315,5 @@ app.commandLine.appendSwitch("ignore-gpu-blacklist");
 app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
-	if (process.env.WINDOW_TYPE !== "fullscreen") {
-		createWindow();
-	} else {
-		createFullscreenWindow();
-	}
+	createWindow();
 });

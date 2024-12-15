@@ -2,7 +2,7 @@ import "../../../i18n";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { useFullscreenContext } from "context/fullscreen.context";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactUtils } from "data/utils/ReactUtils";
 import Image from "@components/image/Image";
 import HomeCardList from "./HomeCardList";
@@ -14,13 +14,6 @@ function HomeView() {
 	const dispatch = useDispatch();
 	const { homeBackgroundLoaded, setHomeBackgroundLoaded } =
 		useFullscreenContext();
-
-	const currentSeason = useSelector(
-		(state: RootState) => state.data.selectedSeason
-	);
-	const currentEpisode = useSelector(
-		(state: RootState) => state.data.selectedEpisode
-	);
 
 	const librariesList = useSelector(
 		(state: RootState) => state.data.libraries
@@ -95,9 +88,8 @@ function HomeView() {
 	const [gradientLeft, setGradientLeft] = useState<string>("none");
 
 	useEffect(() => {
-		const generateGradient = async (path: string) => {
-			if (path !== "none") {
-				const extPath = await window.electronAPI.getExternalPath(path);
+		const generateGradient = async (extPath: string) => {
+			if (extPath !== "none") {
 
 				if (extPath !== "") {
 					await ReactUtils.getDominantColors(extPath);
@@ -130,7 +122,7 @@ function HomeView() {
 		) {
 			setHomeBackgroundLoaded(false);
 			setTimeout(() => {
-				generateGradient(homeInfoElement.season.backgroundSrc);
+				generateGradient(`http://192.168.1.45:3000/${homeInfoElement.season.backgroundSrc}`);
 				setHomeBackgroundLoaded(true);
 			}, 600);
 		} else if (homeInfoElement) {

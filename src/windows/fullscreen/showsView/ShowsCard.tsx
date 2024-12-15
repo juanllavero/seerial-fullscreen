@@ -118,7 +118,7 @@ function ShowsCard({ element }: { element: SeriesData }) {
 					width={seriesImageWidth}
 					height={seriesImageWidth}
 					errorSrc="/img/songDefault.png"
-					isRelative={false}
+					isRelative={true}
 				/>
 			) : (
 				<Image

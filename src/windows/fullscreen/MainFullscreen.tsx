@@ -11,19 +11,28 @@ import HeaderComponent from "./HeaderComponent";
 import BackgroundImages from "./BackgroundImages";
 import DetailsView from "./detailsView/DetailsView";
 import MainMenu from "./MainMenu";
-import useLoadLibraries from "hooks/useFetch";
-import { selectLibrary } from "@redux/slices/dataSlice";
+import { selectLibrary, setLibraries } from "@redux/slices/dataSlice";
 import Loading from "@components/utils/Loading";
 import VideoControls from "./videoPlayer/VideoControls";
+import { LibraryData } from "@interfaces/LibraryData";
+import useFetchArray from "hooks/useFetch";
 
 function MainFullscreen() {
 	const dispatch = useDispatch();
-	const { loading, error } = useLoadLibraries();
+	const { data, loading, error } = useFetchArray<LibraryData>(
+		"http://192.168.1.45:3000/libraries"
+	);
 	const { currentFullscreenSection } = useSectionContext();
 
 	useEffect(() => {
 		dispatch(selectLibrary(null));
 	}, []);
+
+	useEffect(() => {
+		if (data) {
+			dispatch(setLibraries(data));
+		}
+	}, [data]);
 
 	//#region KEYBOARD DETECTION
 	/*const handleKeyDown = (event: KeyboardEvent) => {

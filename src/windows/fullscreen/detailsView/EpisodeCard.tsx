@@ -28,12 +28,12 @@ function EpisodeCard({ episode, index, listRef }: { episode: EpisodeData, index:
 					src={episode.imgSrc}
 					alt="Poster"
 					isRelative={true}
-					errorSrc="/img/defaultThumbnail.jpg"
+					errorSrc="/img/songDefault.png"
 				/>
 			) : (
 				<Image
-					src="/img/defaultThumbnail.jpg"
-					isRelative={false}
+					src="/img/songDefault.png"
+					isRelative={true}
 					alt="Poster"
 					errorSrc=""
 				/>
