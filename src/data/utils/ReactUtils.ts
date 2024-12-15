@@ -149,6 +149,54 @@ export class ReactUtils {
 			}
 		}
 	};
+	static scrollMatrixToCenter = (
+		scrollElement: HTMLElement,
+		scrollOffsetY: number, // Desplazamiento vertical
+		duration: number
+	) => {
+		const startY = scrollElement.scrollTop;
+		const startTime = performance.now();
+	
+		const animateScroll = (currentTime: number) => {
+			const timeElapsed = currentTime - startTime;
+			const progress = Math.min(timeElapsed / duration, 1);
+	
+			// Solo desplazamiento vertical
+			scrollElement.scrollTop = startY + scrollOffsetY * progress;
+	
+			if (timeElapsed < duration) {
+				requestAnimationFrame(animateScroll);
+			}
+		};
+	
+		requestAnimationFrame(animateScroll);
+	};
+	public static handleScrollMatrixElementClick = (
+		index: number,
+		listRef: React.RefObject<HTMLDivElement>
+	) => {
+		const elementButton = listRef.current?.children[index] as HTMLElement;
+		if (elementButton && listRef.current) {
+			const listRect = listRef.current.getBoundingClientRect(); // Área visible de la lista
+			const buttonRect = elementButton.getBoundingClientRect(); // Posición del elemento
+	
+			// Cálculo del centro del botón (elemento seleccionado)
+			const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+			const listCenterY = listRect.top + listRect.height / 2;
+	
+			// Si el elemento no está centrado, calcular el desplazamiento necesario
+			if (buttonCenterY !== listCenterY) {
+				const scrollOffsetY = buttonCenterY - listCenterY;
+	
+				// Realizar el scroll en vertical con desplazamiento calculado
+				ReactUtils.scrollMatrixToCenter(
+					listRef.current,
+					scrollOffsetY,
+					300 // 300ms de duración del scroll
+				);
+			}
+		}
+	};
 	//#endregion
 
 	/**

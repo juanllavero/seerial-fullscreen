@@ -8,7 +8,10 @@ import Image from "@components/image/Image";
 import HomeCardList from "./HomeCardList";
 import HomeInfo from "./HomeInfo";
 import { HomeInfoElement } from "@interfaces/HomeInfoElement";
-import { setCurrentlyWatchingShows, setHomeInfoElement } from "@redux/slices/fullscreenSectionsSlice";
+import {
+	setCurrentlyWatchingShows,
+	setHomeInfoElement,
+} from "@redux/slices/fullscreenSectionsSlice";
 
 function HomeView() {
 	const dispatch = useDispatch();
@@ -30,6 +33,14 @@ function HomeView() {
 	const homeInfoElement = useSelector(
 		(state: RootState) => state.fullscreenSection.homeInfoElement
 	);
+
+	// Change background color to match dominant color
+	useEffect(() => {
+		const contentDiv = document.getElementById("root") as HTMLElement;
+		if (contentDiv) {
+			//contentDiv.style.backgroundColor = dominantColor;
+		}
+	}, [dominantColor]);
 
 	// Set Currently Watching
 	useEffect(() => {
@@ -90,7 +101,6 @@ function HomeView() {
 	useEffect(() => {
 		const generateGradient = async (extPath: string) => {
 			if (extPath !== "none") {
-
 				if (extPath !== "") {
 					await ReactUtils.getDominantColors(extPath);
 
@@ -98,7 +108,7 @@ function HomeView() {
 
 					if (dominantColor) {
 						setGradient(
-							`radial-gradient(135% 103% at 97% 39%, #073AFF00 41%, ${dominantColor} 68%)`
+							`radial-gradient(135% 93% at 95% 20%, #073AFF00 21%, ${dominantColor} 68%)`
 						);
 						setGradientLeft(
 							`linear-gradient(90deg, ${dominantColor} 0%, ${dominantColor} 100%)`
@@ -122,7 +132,9 @@ function HomeView() {
 		) {
 			setHomeBackgroundLoaded(false);
 			setTimeout(() => {
-				generateGradient(`http://192.168.1.45:3000/${homeInfoElement.season.backgroundSrc}`);
+				generateGradient(
+					`http://192.168.1.45:3000/${homeInfoElement.season.backgroundSrc}`
+				);
 				setHomeBackgroundLoaded(true);
 			}, 600);
 		} else if (homeInfoElement) {
@@ -165,7 +177,7 @@ function HomeView() {
 				</>
 			) : null}
 			<HomeInfo />
-			<HomeCardList/>
+			<HomeCardList />
 		</section>
 	);
 }

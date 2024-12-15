@@ -5,7 +5,7 @@ import ShowsCard from "./ShowsCard";
 import { useEffect } from "react";
 import { selectSeries } from "@redux/slices/dataSlice";
 
-function ShowsView() {
+function ShowsView({ listRef }: { listRef: React.RefObject<HTMLDivElement> }) {
 	const dispatch = useDispatch();
 	const selectedLibrary = useSelector(
 		(state: RootState) => state.data.selectedLibrary
@@ -23,8 +23,13 @@ function ShowsView() {
 	return (
 		<div className="shows-container">
 			{selectedLibrary &&
-				selectedLibrary.series.map((element) => (
-					<ShowsCard element={element} key={element.id} />
+				selectedLibrary.series.map((element, index) => (
+					<ShowsCard
+						element={element}
+						index={index}
+						key={element.id}
+						listRef={listRef}
+					/>
 				))}
 		</div>
 	);

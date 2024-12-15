@@ -1,12 +1,14 @@
 @use "../utils/variables" as v;
 
 .header-container {
-	padding: 2em 3em 0.7em 3em;
+	padding: 0 3rem;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
 	justify-content: space-between;
 	z-index: 100;
+
+	height: 7dvh;
 
 	-webkit-app-region: drag;
 
@@ -22,8 +24,8 @@
 		transition: all 0.15s ease;
 
 		svg {
-			width: 3em;
-			height: 3em;
+			width: 3dvh;
+			height: 3dvh;
 			path {
 				fill: v.$color-text-primary;
 			}
@@ -49,7 +51,7 @@
 			height: fit-content;
 			padding: 0.5em;
 
-			font-size: v.$font-large;
+			font-size: 1.8dvh;
 			font-weight: bold;
 			text-transform: uppercase;
 			color: white;
@@ -93,8 +95,8 @@
 		transition: all 0.15s ease;
 
 		svg {
-			width: 3em;
-			height: 3em;
+			width: 3dvh;
+			height: 3dvh;
 			path {
 				fill: v.$color-text-primary;
 			}
@@ -111,9 +113,9 @@
 		align-items: center;
 
 		#time {
-			margin-right: 1.5em;
+			margin-right: 1.5rem;
 			color: white;
-			font-size: v.$font-large;
+			font-size: 1.7dvh;
 			filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.747));
 		}
 
@@ -135,8 +137,8 @@
 			border-radius: 10px;
 			filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.861));
 			svg {
-				width: 2.8em;
-				height: 2.8em;
+				width: 4dvh;
+				height: 4dvh;
 
 				path {
 					fill: white;

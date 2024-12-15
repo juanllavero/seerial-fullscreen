@@ -64,7 +64,7 @@ function HomeCardList() {
 	//#endregion
 
 	return (
-		<>
+		<div className="continue-watching-section">
 			<div className="continue-watching-title">
 				<span>{t("continueWatching")}</span>
 			</div>
@@ -88,7 +88,7 @@ function HomeCardList() {
 					)
 				)}
 			</div>
-		</>
+		</div>
 	);
 }
 

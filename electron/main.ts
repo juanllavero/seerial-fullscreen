@@ -84,8 +84,8 @@ ipcMain.handle("translate", (_event, key) => {
 function createWindow() {
 	const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
-	const windowWidth = Math.floor(width * 0.7);
-	const windowHeight = Math.floor(height * 0.8);
+	const windowWidth = Math.floor(width * 0.75);
+	const windowHeight = Math.floor(height);
 
 	win = new BrowserWindow({
 		width: windowWidth,

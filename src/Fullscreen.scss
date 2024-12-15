@@ -52,81 +52,105 @@ body {
 }
 
 .content {
-	width: 100%;
-	height: 100%;
 	overflow-y: auto;
 	text-align: left;
+	height: 93dvh;
+	width: 100%;
 
 	z-index: 10;
 
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
 	.home-container {
-		height: 100%;
 		display: flex;
 		flex-flow: column nowrap;
 		justify-content: flex-end;
 		overflow-y: hidden;
-	
+
 		.home-info-container {
 			display: flex;
 			flex-flow: column nowrap;
-			margin-left: 4em;
-			margin-bottom: 2em;
-			gap: 1em;
-		
+			justify-content: end;
+			margin-left: 4rem;
+			gap: 2rem;
+
+			height: 46dvh;
+			padding-bottom: 2dvh;
+
 			z-index: 100;
-		
-			img {
-				width: auto;
-				max-width: 40vh;
-			}
-		
-			#home-title {
-				font-size: $font-xxx-large;
-				font-weight: bold;
-				color: $color-text-primary;
-				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
-			}
-		
-			#home-subtitle {
-				font-size: $font-xxx-large;
-				font-weight: bold;
-				color: $color-text-primary;
-				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
-			}
-		
-			#home-overview {
-				font-size: $font-x-large;
-				color: $color-text-default;
-		
-				max-width: 100vh;
-		
-				box-sizing: border-box;
-		
-				--line-clamp-amount: 3;
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				overflow: hidden !important;
-				text-overflow: ellipsis;
-				line-clamp: var(--line-clamp-amount);
-				-webkit-line-clamp: var(--line-clamp-amount);
-				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
-			}
-		
-			.home-info-horizontal {
+
+			.logo-container {
 				display: flex;
-				gap: 1em;
-		
-				font-size: $font-x-large;
-				filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.472));
+
+				max-height: 25dvh;
+				width: fit-content;
+
+				img {
+					max-height: 20dvh;
+					width: auto;
+
+					max-width: 50dvw;
+				}
+
+				#home-title {
+					font-size: 8dvh;
+					font-weight: bold;
+					color: $color-text-primary;
+					filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+				}
+			}
+
+			.info-container {
+				display: flex;
+				flex-flow: column nowrap;
+
+				max-height: 23dvh;
+				gap: 1rem;
+
+				#home-subtitle {
+					font-size: $font-xxx-large;
+					font-weight: bold;
+					color: $color-text-primary;
+					filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+				}
+
+				#home-overview {
+					font-size: $font-x-large;
+					color: $color-text-default;
+
+					height: 100%;
+					max-width: 100vh;
+
+					box-sizing: border-box;
+
+					--line-clamp-amount: 3;
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					overflow: hidden !important;
+					text-overflow: ellipsis;
+					line-clamp: var(--line-clamp-amount);
+					-webkit-line-clamp: var(--line-clamp-amount);
+					filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.724));
+				}
+
+				.home-info-horizontal {
+					display: flex;
+					gap: 1em;
+
+					font-size: $font-x-large;
+					filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.472));
+				}
 			}
 		}
 	}
 
 	.shows-container {
-		display: flex;
-		flex-flow: row wrap;
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 2dvh;
 		padding: 2em 4em;
-		gap: 1em;
 
 		.shows-button {
 			display: flex;
@@ -138,6 +162,16 @@ body {
 
 			border: 0.3em solid transparent;
 			transition: all 0.15s ease;
+
+			img {
+				width: 100%;
+				height: auto;
+				aspect-ratio: 2 / 3;
+			}
+
+			.music-aspect-ratio {
+				aspect-ratio: 1 / 1;
+			}
 		}
 
 		.selected {
@@ -683,17 +717,17 @@ body {
 	position: absolute;
 	left: 0;
 	opacity: 0;
-	width: 20vw;
+	width: 40%;
 	height: 100%;
 	z-index: 1;
-	filter: brightness(15%);
+	filter: brightness(25%);
 }
 
 .gradient {
 	position: absolute;
 	right: 0;
 	opacity: 0;
-	width: 80vw;
+	width: 60%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -701,14 +735,17 @@ body {
 	z-index: 1;
 	background-size: 100% 100%;
 	background-position: 0px 0px;
-	filter: brightness(15%);
+	filter: brightness(25%);
 }
 
 .background-image {
 	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: auto;
 	z-index: 0;
+
+	top: 0;
+	right: 0;
 
 	opacity: 0;
 
@@ -716,12 +753,15 @@ body {
 	justify-content: right;
 
 	img {
-		min-width: 80%;
+		max-width: 60%;
+		min-width: 60%;
+		height: 85dvh;
 		object-fit: cover;
-		mask-image: linear-gradient(
-			to left,
-			rgba(0, 0, 0, 1) 20%,
-			rgba(0, 0, 0, 0) 100%
-		);
+		opacity: 0.9;
+		// mask-image: linear-gradient(
+		// 	to left,
+		// 	rgba(0, 0, 0, 1) 20%,
+		// 	rgba(0, 0, 0, 0) 100%
+		// );
 	}
 }

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "../../i18n";
 import "../../Fullscreen.scss";
 import HomeView from "./homeView/HomeView";
@@ -24,6 +24,8 @@ function MainFullscreen() {
 	);
 	const { currentFullscreenSection } = useSectionContext();
 
+	const listRef = useRef<HTMLDivElement>(null);
+
 	useEffect(() => {
 		dispatch(selectLibrary(null));
 	}, []);
@@ -33,65 +35,6 @@ function MainFullscreen() {
 			dispatch(setLibraries(data));
 		}
 	}, [data]);
-
-	//#region KEYBOARD DETECTION
-	/*const handleKeyDown = (event: KeyboardEvent) => {
-		if (!currentSeason) {
-			return;
-		}
-
-		const currentIndex = currentSeason.episodes.findIndex(
-			(episode) => episode === currentEpisode
-		);
-
-		if (songsView) {
-			if (event.key === "ArrowDown") {
-				// Mover al siguiente episodio si existe
-				const nextIndex = currentIndex + 1;
-				if (nextIndex < currentSeason.episodes.length) {
-					handleScrollElementClick<EpisodeData>(nextIndex, listRef, true);
-					dispatch(selectEpisode(currentSeason.episodes[nextIndex]));
-				}
-			}
-
-			if (event.key === "ArrowUp") {
-				// Mover al episodio anterior si existe
-				const prevIndex = currentIndex - 1;
-				if (prevIndex >= 0) {
-					handleScrollElementClick<EpisodeData>(prevIndex, listRef, true);
-					dispatch(selectEpisode(currentSeason.episodes[prevIndex]));
-				}
-			}
-		} else {
-			if (event.key === "ArrowRight") {
-				// Mover al siguiente episodio si existe
-				const nextIndex = currentIndex + 1;
-				if (nextIndex < currentSeason.episodes.length) {
-					handleScrollElementClick<EpisodeData>(nextIndex, listRef, false);
-					dispatch(selectEpisode(currentSeason.episodes[nextIndex]));
-				}
-			}
-
-			if (event.key === "ArrowLeft") {
-				// Mover al episodio anterior si existe
-				const prevIndex = currentIndex - 1;
-				if (prevIndex >= 0) {
-					handleScrollElementClick<EpisodeData>(prevIndex, listRef, false);
-					dispatch(selectEpisode(currentSeason.episodes[prevIndex]));
-				}
-			}
-		}
-	};
-
-	// Add and Clean Keyboard Events
-	useEffect(() => {
-		window.addEventListener("keydown", handleKeyDown);
-
-		return () => {
-			window.removeEventListener("keydown", handleKeyDown);
-		};
-	}, [currentEpisode, currentSeason?.episodes]);*/
-	//#endregion
 
 	return (
 		<>
@@ -114,7 +57,7 @@ function MainFullscreen() {
 					<HeaderComponent />
 
 					{/* CONTENT SECTION */}
-					<section className="content">
+					<div className="content" ref={listRef}>
 						{loading ? (
 							<div></div>
 						) : error ? (
@@ -123,14 +66,14 @@ function MainFullscreen() {
 							<HomeView />
 						) : currentFullscreenSection ===
 						  FullscreenSections.Collections ? (
-							<ShowsView />
+							<ShowsView listRef={listRef}/>
 						) : currentFullscreenSection ===
 						  FullscreenSections.Details ? (
 							<DetailsView />
 						) : (
 							<NoContentFullscreen />
 						)}
-					</section>
+					</div>
 				</>
 			)}
 		</>

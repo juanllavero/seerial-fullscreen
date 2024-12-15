@@ -1,5 +1,6 @@
 import Image from "@components/image/Image";
 import { FullscreenSections } from "@data/enums/Sections";
+import { ReactUtils } from "@data/utils/ReactUtils";
 import { SeriesData } from "@interfaces/SeriesData";
 import {
 	selectSeries,
@@ -12,7 +13,15 @@ import { useSectionContext } from "context/section.context";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function ShowsCard({ element }: { element: SeriesData }) {
+function ShowsCard({
+	element,
+	index,
+	listRef,
+}: {
+	element: SeriesData;
+	index: number;
+	listRef: React.RefObject<HTMLDivElement>;
+}) {
 	const dispatch = useDispatch();
 	const { setCurrentFullscreenSection } = useSectionContext();
 
@@ -30,13 +39,6 @@ function ShowsCard({ element }: { element: SeriesData }) {
 	);
 	const currentSeason = useSelector(
 		(state: RootState) => state.data.selectedSeason
-	);
-
-	const seriesImageWidth = useSelector(
-		(state: RootState) => state.seriesImage.width
-	);
-	const seriesImageHeight = useSelector(
-		(state: RootState) => state.seriesImage.height
 	);
 
 	useEffect(() => {
@@ -57,6 +59,13 @@ function ShowsCard({ element }: { element: SeriesData }) {
 	) => {
 		if (show && currentShow !== show) {
 			dispatch(selectSeries(show));
+
+			if (selectedLibrary) {
+				ReactUtils.handleScrollMatrixElementClick(
+					index,
+					listRef
+				);
+			}
 		} else if (show && !automaticSelection) {
 			if (show.seasons && show.seasons.length > 0) {
 				if (
@@ -115,8 +124,7 @@ function ShowsCard({ element }: { element: SeriesData }) {
 				<Image
 					src={element.coverSrc}
 					alt="Poster"
-					width={seriesImageWidth}
-					height={seriesImageWidth}
+					className="music-aspect-ratio"
 					errorSrc="/img/songDefault.png"
 					isRelative={true}
 				/>
@@ -130,8 +138,6 @@ function ShowsCard({ element }: { element: SeriesData }) {
 							: element.coverSrc
 					}
 					alt="Poster"
-					width={seriesImageWidth}
-					height={seriesImageHeight}
 					errorSrc="/img/fileNotFound.jpg"
 					isRelative={true}
 				/>

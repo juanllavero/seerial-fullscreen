@@ -116,7 +116,7 @@ function BackgroundImages() {
 					currentShowForBackground.seasons.length > 0 &&
 					currentShowForBackground.seasons[0].backgroundSrc !== "" ? (
 						<Image
-							src={`//img/backgrounds/${currentShowForBackground.seasons[0].id}/fullBlur.jpg`}
+							src={`img/backgrounds/${currentShowForBackground.seasons[0].id}/fullBlur.jpg`}
 							alt="Background"
 							isRelative={true}
 							errorSrc=""

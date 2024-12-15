@@ -16,18 +16,19 @@
 
 	span {
 		margin-bottom: 2vh;
-		font-size: v.$font-xx-large;
+		font-size: 4dvh;
 		color: v.$color-text-primary;
 	}
 
 	button {
-		width: 80vh;
+		width: 80dvw;
+		max-width: 1300px;
 		outline: none;
 		border: none;
 
 		color: white;
 
-		font-size: v.$font-large;
+		font-size: 2dvh;
 		padding: 1em;
 		border-radius: 5px;
 		background-color: #282828;
