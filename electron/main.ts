@@ -48,10 +48,10 @@ function saveConfig(config: Record<string, any>): void {
 	fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
 }
 
-let configData = loadOrCreateConfig();
+/*let configData = loadOrCreateConfig();
 
 // IPC Handlers para `get` y `set`
-/*ipcMain.handle("get-config", (_event, key: string, defaultValue: any) => {
+ipcMain.handle("get-config", (_event, key: string, defaultValue: any) => {
 	if (!(key in configData)) {
 		configData[key] = defaultValue;
 		saveConfig(configData);
