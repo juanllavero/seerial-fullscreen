@@ -85,11 +85,15 @@ function BackgroundImages() {
 							/>
 						) : null}
 					</div>
-					<div
-						className={`season-gradient ${
-							homeBackgroundLoaded ? "loaded-blur-in" : "loaded-blur-out"
-						}`}
-					></div>
+					{selectedLibrary?.type !== "Music" && (
+						<div
+							className={`season-gradient ${
+								homeBackgroundLoaded
+									? "loaded-blur-in"
+									: "loaded-blur-out"
+							}`}
+						></div>
+					)}
 
 					{selectedLibrary?.type === "Music" && (
 						<div

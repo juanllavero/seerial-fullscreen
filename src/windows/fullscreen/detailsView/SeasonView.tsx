@@ -41,64 +41,72 @@ function SeasonsView() {
 			{selectedLibrary && currentShow && currentSeason && currentEpisode ? (
 				<>
 					<div className="season-info-container">
-						{selectedLibrary.type === "Shows" ? (
-							<>
-								{currentShow.logoSrc && currentShow.logoSrc !== "" ? (
-									<Image
-										src={currentShow.logoSrc}
-										alt="Logo"
-										isRelative={true}
-										errorSrc=""
-									/>
-								) : (
-									<span id="season-title">{currentShow.name}</span>
-								)}
-							</>
-						) : (
-							<>
-								{currentSeason.logoSrc &&
-								currentSeason.logoSrc !== "" ? (
-									<Image
-										src={currentSeason.logoSrc}
-										alt="Logo"
-										isRelative={true}
-										errorSrc=""
-									/>
-								) : (
-									<span id="season-title">{currentShow.name}</span>
-								)}
-							</>
-						)}
-
-						<span id="season-subtitle">
-							{selectedLibrary.type === "Shows" && currentSeason
-								? currentSeason.name
-								: null}
-						</span>
-						<div className="season-info-horizontal">
+						<div className="season-title-container">
 							{selectedLibrary.type === "Shows" ? (
-								<span>
-									{t("seasonLetter")}
-									{currentEpisode.seasonNumber} · {t("episodeLetter")}
-									{currentEpisode.episodeNumber}
-								</span>
-							) : null}
-							<span>
-								{selectedLibrary.type === "Shows"
-									? currentEpisode.year
-									: new Date(currentEpisode.year).getFullYear()}
-							</span>
-							<span>
-								{ReactUtils.formatTimeForView(currentEpisode.runtime)}
-							</span>
+								<>
+									{currentShow.logoSrc &&
+									currentShow.logoSrc !== "" ? (
+										<Image
+											src={currentShow.logoSrc}
+											alt="Logo"
+											isRelative={true}
+											errorSrc=""
+										/>
+									) : (
+										<span id="season-title">{currentShow.name}</span>
+									)}
+								</>
+							) : (
+								<>
+									{currentSeason.logoSrc &&
+									currentSeason.logoSrc !== "" ? (
+										<Image
+											src={currentSeason.logoSrc}
+											alt="Logo"
+											isRelative={true}
+											errorSrc=""
+										/>
+									) : (
+										<span id="season-title">{currentShow.name}</span>
+									)}
+								</>
+							)}
 						</div>
-						<div className="season-overview-container">
-							<span id="season-overview">
-								{currentEpisode.overview ||
-									currentSeason.overview ||
-									currentShow.overview ||
-									t("defaultOverview")}
+
+						<div className="season-info">
+							<span id="season-subtitle">
+								{selectedLibrary.type === "Shows" && currentSeason
+									? currentSeason.name
+									: null}
 							</span>
+							<div className="season-info-horizontal">
+								{selectedLibrary.type === "Shows" ? (
+									<span>
+										{t("seasonLetter")}
+										{currentEpisode.seasonNumber} ·{" "}
+										{t("episodeLetter")}
+										{currentEpisode.episodeNumber}
+									</span>
+								) : null}
+								<span>
+									{selectedLibrary.type === "Shows"
+										? currentEpisode.year
+										: new Date(currentEpisode.year).getFullYear()}
+								</span>
+								<span>
+									{ReactUtils.formatTimeForView(
+										currentEpisode.runtime
+									)}
+								</span>
+							</div>
+							<div className="season-overview-container">
+								<span id="season-overview">
+									{currentEpisode.overview ||
+										currentSeason.overview ||
+										currentShow.overview ||
+										t("defaultOverview")}
+								</span>
+							</div>
 						</div>
 					</div>
 					{currentSeason.episodes && currentSeason.episodes.length > 1 ? (
