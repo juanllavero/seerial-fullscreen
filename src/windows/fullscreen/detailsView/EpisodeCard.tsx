@@ -1,4 +1,4 @@
-import ResolvedImage from "@components/image/ExternalImage";
+import Image from "@components/image/Image";
 import { ReactUtils } from "@data/utils/ReactUtils";
 import { EpisodeData } from "@interfaces/EpisodeData";
 import { selectEpisode } from "@redux/slices/dataSlice";
@@ -24,18 +24,18 @@ function EpisodeCard({ episode, index, listRef }: { episode: EpisodeData, index:
 			}}
 		>
 			{episode.imgSrc !== "" ? (
-				<ResolvedImage
+				<Image
 					src={episode.imgSrc}
 					alt="Poster"
-					onError={(e: any) => {
-						e.target.onerror = null; // To avoid infinite loop
-						e.target.src = "/img/defaultThumbnail.jpg";
-					}}
+					isRelative={true}
+					errorSrc="/img/defaultThumbnail.jpg"
 				/>
 			) : (
-				<ResolvedImage
+				<Image
 					src="/img/defaultThumbnail.jpg"
+					isRelative={false}
 					alt="Poster"
+					errorSrc=""
 				/>
 			)}
 		</div>
