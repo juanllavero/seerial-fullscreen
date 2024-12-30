@@ -1,3 +1,4 @@
+import { useDataContext } from "context/data.context";
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
@@ -7,6 +8,7 @@ interface ImageProps {
 	alt: string;
 	width?: number;
 	height?: number;
+	style?: React.CSSProperties;
 	errorSrc: string;
 	isRelative: boolean;
 	className?: string;
@@ -19,21 +21,28 @@ function Image({
 	alt,
 	width,
 	height,
+	style,
 	errorSrc,
 	isRelative,
 	className,
 	onLoad,
 }: ImageProps) {
+	const { serverIP } = useDataContext();
 	return (
 		<>
 			{isRelative ? (
 				<LazyLoadImage
 					id={id && id}
-					src={`http://192.168.1.45:3000/${src}`}
+					src={
+						src.startsWith("http")
+							? src
+							: `https://${serverIP}/${src}`
+					}
 					alt={alt}
 					style={{
-						width: `${width}px`,
-						height: `${height}px`,
+						width: width ? `${width}px` : undefined,
+						height: height ? `${height}px` : undefined,
+						...style,
 					}}
 					onError={(e: any) => {
 						e.target.onerror = null; // To avoid infinite loop

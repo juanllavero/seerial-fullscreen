@@ -6,21 +6,23 @@ import HomeView from "./homeView/HomeView";
 import ShowsView from "./showsView/ShowsView";
 import { useSectionContext } from "context/section.context";
 import { FullscreenSections } from "@data/enums/Sections";
-import NoContentFullscreen from "./NoContentFullscreen";
+import NoContent from "./NoContent";
 import HeaderComponent from "./HeaderComponent";
 import BackgroundImages from "./BackgroundImages";
 import DetailsView from "./detailsView/DetailsView";
 import MainMenu from "./MainMenu";
 import { selectLibrary, setLibraries } from "@redux/slices/dataSlice";
 import Loading from "@components/utils/Loading";
-import VideoControls from "./videoPlayer/VideoControls";
 import { LibraryData } from "@interfaces/LibraryData";
 import useFetchArray from "hooks/useFetch";
+import { useDataContext } from "context/data.context";
+import SetServerAndAPIKey from "./inputServerAndAPI/SetServerAndAPIKey";
 
 function MainFullscreen() {
 	const dispatch = useDispatch();
+	const { serverIP, serverStatus, apiKeyStatus } = useDataContext();
 	const { data, loading, error } = useFetchArray<LibraryData>(
-		"http://192.168.1.45:3000/libraries"
+		`https://${serverIP}/libraries`
 	);
 	const { currentFullscreenSection } = useSectionContext();
 
@@ -38,7 +40,9 @@ function MainFullscreen() {
 
 	return (
 		<>
-			{loading ? (
+			{!serverStatus || !apiKeyStatus ? (
+				<SetServerAndAPIKey />
+			) : loading ? (
 				<>
 					<Loading />
 				</>
@@ -61,17 +65,17 @@ function MainFullscreen() {
 						{loading ? (
 							<div></div>
 						) : error ? (
-							<NoContentFullscreen />
+							<NoContent />
 						) : currentFullscreenSection === FullscreenSections.Home ? (
 							<HomeView />
 						) : currentFullscreenSection ===
 						  FullscreenSections.Collections ? (
-							<ShowsView listRef={listRef}/>
+							<ShowsView listRef={listRef} />
 						) : currentFullscreenSection ===
 						  FullscreenSections.Details ? (
 							<DetailsView />
 						) : (
-							<NoContentFullscreen />
+							<NoContent />
 						)}
 					</div>
 				</>

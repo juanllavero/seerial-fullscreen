@@ -1,0 +1,69 @@
+@use "../../utils/variables" as v;
+
+.input-background {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+	.input-server {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+
+		#input-title {
+			font-size: 3dvh;
+			color: white;
+		}
+
+		input,
+		textarea {
+			padding: 1em 1.3em 1em 1.3em;
+			background-color: v.$color-lighter;
+			border: none;
+			outline: none;
+			border-radius: 3px;
+
+			font-size: 1.3dvh;
+			font-family: sans-serif;
+
+			color: v.$color-text-primary;
+
+			transition: background-color 0.15s ease;
+		}
+
+		input::placeholder {
+			color: v.$color-text-default;
+		}
+
+		input:focus {
+			background-color: v.$color-bright;
+			color: black;
+		}
+
+		button {
+			margin-right: 0.6em;
+
+			padding: 1em 1.3em 1em 1.3em;
+
+			border: none;
+			border-radius: 3px;
+
+			transition: background-color 0.3s ease;
+
+			font-size: small;
+			font-weight: bold;
+			color: v.$color-text-primary;
+			background-color: v.$app-color-darker;
+
+			cursor: pointer;
+
+			&:hover {
+				background-color: v.$app-color;
+				color: v.$color-dark;
+			}
+		}
+	}
+}

@@ -12,9 +12,11 @@ import {
 	setCurrentlyWatchingShows,
 	setHomeInfoElement,
 } from "@redux/slices/fullscreenSectionsSlice";
+import { useDataContext } from "context/data.context";
 
 function HomeView() {
 	const dispatch = useDispatch();
+	const { serverIP } = useDataContext();
 	const { homeBackgroundLoaded, setHomeBackgroundLoaded } =
 		useFullscreenContext();
 
@@ -133,7 +135,7 @@ function HomeView() {
 			setHomeBackgroundLoaded(false);
 			setTimeout(() => {
 				generateGradient(
-					`http://192.168.1.45:3000/${homeInfoElement.season.backgroundSrc}`
+					`http://${serverIP}/${homeInfoElement.season.backgroundSrc}`
 				);
 				setHomeBackgroundLoaded(true);
 			}, 600);

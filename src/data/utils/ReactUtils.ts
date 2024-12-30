@@ -50,19 +50,20 @@ export class ReactUtils {
 
 	public static generateGradient = (
 		collection: SeriesData | null,
-		album: SeasonData | null
+		album: SeasonData | null,
+		serverIP: string
 	) => {
 		if (collection && !album) {
 			if (collection.coverSrc !== "") {
-				ReactUtils.getDominantColors(`http://192.168.1.45:3000/${collection.coverSrc}`);
+				ReactUtils.getDominantColors(`https://${serverIP}/${collection.coverSrc}`);
 			} else {
 				ReactUtils.getDominantColors("/img/songDefault.png");
 			}
 		} else if (collection && album) {
 			if (album.coverSrc !== "") {
-				ReactUtils.getDominantColors(`http://192.168.1.45:3000/${album.coverSrc}`);
+				ReactUtils.getDominantColors(`https://${serverIP}/${album.coverSrc}`);
 			} else if (collection.coverSrc !== "") {
-				ReactUtils.getDominantColors(`http://192.168.1.45:3000/${collection.coverSrc}`);
+				ReactUtils.getDominantColors(`https://${serverIP}/${collection.coverSrc}`);
 			} else {
 				ReactUtils.getDominantColors("/img/songDefault.png");
 			}
