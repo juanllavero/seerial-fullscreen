@@ -108,12 +108,12 @@ function HomeView() {
 
 					setDominantColor(ReactUtils.colors[0]);
 
-					if (dominantColor) {
+					if (ReactUtils.colors[0]) {
 						setGradient(
-							`radial-gradient(135% 93% at 95% 20%, #073AFF00 21%, ${dominantColor} 68%)`
+							`radial-gradient(135% 93% at 95% 20%, #073AFF00 21%, ${ReactUtils.colors[0]} 68%)`
 						);
 						setGradientLeft(
-							`linear-gradient(90deg, ${dominantColor} 0%, ${dominantColor} 100%)`
+							`linear-gradient(90deg, ${ReactUtils.colors[0]} 0%, ${ReactUtils.colors[0]} 100%)`
 						);
 					}
 				}

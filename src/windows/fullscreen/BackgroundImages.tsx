@@ -120,7 +120,7 @@ function BackgroundImages() {
 					currentShowForBackground.seasons.length > 0 &&
 					currentShowForBackground.seasons[0].backgroundSrc !== "" ? (
 						<Image
-							src={`img/backgrounds/${currentShowForBackground.seasons[0].id}/fullBlur.jpg`}
+							src={`img/backgrounds/${currentShowForBackground.seasons[0].id}/background.jpg`}
 							alt="Background"
 							isRelative={true}
 							errorSrc=""
@@ -138,13 +138,13 @@ function BackgroundImages() {
 				/>
 			)}
 
-			{currentFullscreenSection === FullscreenSections.Home ||
+			{currentFullscreenSection !== FullscreenSections.Home &&
 			!useImageAsBackground ? (
 				<div className="noise-background">
 					<Image
 						src="/img/noise.png"
 						alt="Noise image"
-						isRelative={true}
+						isRelative={false}
 						errorSrc=""
 					/>
 				</div>
